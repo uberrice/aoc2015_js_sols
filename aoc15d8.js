@@ -1,30 +1,47 @@
 var fs = require('fs');
 var myInputs = fs.readFileSync('d8input.txt');
-var test = myInputs.length;
-var test2 = myInputs.toString();
-var test3 = test2.split("\r\n")[1];
-console.log(test);
-console.log(test3);
-console.log(test3.length);
 
 console.log("test\nmoretest\n");
 
-
-function stringParser(instr){
-    let regex1 = /(").*\1/;
-    for (c of instr) {
-        switch (c) {
-            case '"':
-                
+var totlength = 0;
+var texlength = 0;
+function stringParser(instr) {
+    for (let index = 0; index < instr.length; index++) {
+        switch (instr[index]) {
+            case '\\':
+                switch (instr[index + 1]) {
+                    case '\\':
+                        index++;
+                        totlength++;
+                        texlength++;
+                        break;
+                    case 'x':
+                        index += 3;
+                        totlength += 3;
+                        texlength++;
+                        break;
+                    case '"':
+                        index++;
+                        totlength++;
+                        texlength++;
+                        break;
+                    default:
+                        console.log("this can't be, line :" + instr);
+                }
                 break;
-        
+            case '"':
+                break;
             default:
+                texlength++;
                 break;
         }
+        totlength++;
     }
 }
 
+for (const instr of myInputs.toString().split("\r\n")) {
+    stringParser(instr);
+}
 
-let regex1 = /(").*\1/;
-
-console.log('whew, " this is  amazing'.match(regex1));
+console.log("tex: " + texlength + " tot: " + totlength);
+console.log("solution: " + (totlength - texlength));
