@@ -2,9 +2,9 @@ var input : string = "cqjxjnds";
 
 function aInc(ip: string): string{
     if(ip.slice(-1).match(/[hnk]/)){
-        return ip.slice(0, ip.length-1) + String.fromCharCode(2+ip.charCodeAt(ip.length-1));
+        return ip.slice(0, ip.length-1) + String.fromCharCode(2+ip.charCodeAt(ip.length-1)); //not so sweet ASCII-Manip
     } else if(ip.slice(-1) != "z"){
-        return ip.slice(0, ip.length-1) + String.fromCharCode(1+ip.charCodeAt(ip.length-1));
+        return ip.slice(0, ip.length-1) + String.fromCharCode(1+ip.charCodeAt(ip.length-1)); //not so sweet ASCII-Manip
     }
     else{
         return (aInc(ip.slice(0,-1)) + "a"); //sweet sweet recursion
