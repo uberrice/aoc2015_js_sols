@@ -20,7 +20,7 @@ function lookAndSay(s){
 
 lookAndSay(input);
 
-for (let i = 1; i < 40; i++) {
+for (let i = 1; i < 50; i++) { //50 for day 2
     let o2 = output;
     output = "";
     lookAndSay(o2);
